@@ -1,6 +1,6 @@
 FROM phusion/baseimage:jammy-1.0.4
 MAINTAINER Matthew Rayner <hello@rayner.io>
-ENV REFRESHED_AT 2025-09-16
+ENV REFRESHED_AT 2026-11-10
 
 # based on dgraziotin/lamp
 # MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
@@ -12,10 +12,10 @@ ENV DOCKER_USER_GID 20
 ENV BOOT2DOCKER_ID 1000
 ENV BOOT2DOCKER_GID 50
 
-ENV PHPMYADMIN_VERSION=5.1.1
+ENV PHPMYADMIN_VERSION=5.2.2
 ENV SUPERVISOR_VERSION=4.2.2
 
-# Pass PHP version at build: --build-arg PHP_VERSION=8.3 (or 8.2)
+# Pass PHP version at build: --build-arg PHP_VERSION=8.4 (or 8.3, 8.2)
 ARG PHP_VERSION
 ENV PHP_VERSION=${PHP_VERSION}
 
@@ -91,7 +91,7 @@ RUN rm -rf /var/lib/mysql
 ADD supporting_files/create_mysql_users.sh /create_mysql_users.sh
 
 # ---- phpMyAdmin ----
-# Note: 5.1.1 is quite old; for PHP 8.2/8.3 you may need >= 5.2.x.
+# 5.2.2+ is required for PHP 8.4 support.
 RUN wget -O /tmp/phpmyadmin.tar.gz https://files.phpmyadmin.net/phpMyAdmin/${PHPMYADMIN_VERSION}/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages.tar.gz && \
     tar xfvz /tmp/phpmyadmin.tar.gz -C /var/www && \
     ln -s /var/www/phpMyAdmin-${PHPMYADMIN_VERSION}-all-languages /var/www/phpmyadmin && \

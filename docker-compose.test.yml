@@ -71,3 +71,17 @@ services:
       - "3041:3306"
     tmpfs:
       - /var/lib/mysql
+
+  web2004-php84:
+    build:
+      context: .
+      dockerfile: ./2004/Dockerfile
+      args:
+        - PHP_VERSION=8.4
+    environment:
+      - MYSQL_ADMIN_PASS=password
+    ports:
+      - "3050:80"
+      - "3051:3306"
+    tmpfs:
+      - /var/lib/mysql
